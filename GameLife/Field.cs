@@ -31,10 +31,7 @@ namespace GameLife
             {
                 _field.Add(new List<Cell>());
                 for (int j = 0; j < size; j++)
-                {
-
                     _field[i].Add(new Cell(x + i * cellSize, y + j * cellSize, cellSize));
-                }
             }
         }
 

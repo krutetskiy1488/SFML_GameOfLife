@@ -9,6 +9,7 @@ namespace GameLife
 {
     class Core
     {
+        //Проверка работы
         private Dictionary<string, Button> _buttons;
 
         private RenderWindow _window;
@@ -20,17 +21,21 @@ namespace GameLife
 
         public Core(RenderWindow window)
         {
-            _window = window;
             _field = new Field(21, 20, 100, 800, 800);
             _timer = new Clock();
 
+            Image icon = new Image("../../../resources/images/icon.png");
             Font font = new Font("../../../resources/fonts/times-new-roman.ttf");
+
+            _window = window;
+            _window.SetIcon(32, 32, icon.Pixels);
+
             _buttons = new Dictionary<string, Button>();
             _buttons["start"] = new Button (20 , 20 , 50, 100, "Start", font);
             _buttons["clear"] = new Button (130, 20 , 50, 110, "Clear", font);
             _buttons["1x"]    = new Button (250, 20 , 50, 50 , "1x"   , font);
-            _buttons["2x"]    = new Button (370, 20 , 50, 50 , "2x"   , font);
-            _buttons["3x"]    = new Button (490, 20 , 50, 50 , "3x"   , font);
+            _buttons["2x"]    = new Button (310, 20 , 50, 50 , "2x"   , font);
+            _buttons["3x"]    = new Button (370, 20 , 50, 50 , "3x"   , font);
             _buttons["size"]  = new TextBox(610, 20 , 50, 210, "Size: ", font);
         }
 
@@ -38,6 +43,7 @@ namespace GameLife
         {
             _window.Closed += OnClosed;
             _window.TextEntered += EnterText;
+            _window.MouseButtonPressed += MouseButtonPressed;
 
             while (_window.IsOpen)
             {
@@ -47,6 +53,11 @@ namespace GameLife
                 Update();
                 Render();
             }
+        }
+
+        private void MouseButtonPressed(object sender, MouseButtonEventArgs e)
+        {
+            _field.OnBound(_window);
         }
 
         private void EnterText(object sender, TextEventArgs e)
@@ -68,7 +79,6 @@ namespace GameLife
 
         public void Events()
         {
-            _field.OnBound(_window);
             foreach (var key in _buttons.Keys)
                 _buttons[key].OnBound(_window);
 

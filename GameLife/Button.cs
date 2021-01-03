@@ -48,9 +48,15 @@ namespace GameLife
         protected void Fill()
         {
             if (Active)
-                _text.FillColor = Color.Blue;
+            {
+                _text.FillColor = Color.White;
+                _bound.FillColor = Color.Black;
+            }
             else
+            {
                 _text.FillColor = Color.Black;
+                _bound.FillColor = Color.White;
+            }
         }
 
         public bool IsPressed(RenderWindow window)
@@ -59,7 +65,7 @@ namespace GameLife
             var pos = Mouse.GetPosition(window);
             var time = _timer.ElapsedTime.AsSeconds();
 
-            if (bounds.Contains(pos.X, pos.Y) && Mouse.IsButtonPressed(Mouse.Button.Left) && time > 0.1)
+            if (bounds.Contains(pos.X, pos.Y) && Mouse.IsButtonPressed(Mouse.Button.Left) && time > 0.15)
             {
                 _timer.Restart();
                 return true;

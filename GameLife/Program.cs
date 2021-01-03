@@ -13,6 +13,5 @@ namespace GameLife
             Core core = new Core(window);
             core.Run();
         }
-
     }
 }

@@ -43,9 +43,12 @@ namespace GameLife
         {
             var bounds = _cell.GetGlobalBounds();
 
-            if (bounds.Contains(pos.X, pos.Y))
+            if ( bounds.Contains(pos.X, pos.Y))
             {
-                State = Type.Alive;
+                if (State == Type.Dead)
+                    State = Type.Alive;
+                else
+                    State = Type.Dead;
                 Update();
             }
         }

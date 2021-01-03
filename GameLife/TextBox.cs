@@ -25,16 +25,18 @@ namespace GameLife
             var pos = Mouse.GetPosition(window);
             var time = _timer.ElapsedTime.AsSeconds();
 
-            if (bounds.Contains(pos.X, pos.Y) && Mouse.IsButtonPressed(Mouse.Button.Left) && time > 0.1)
+            if (bounds.Contains(pos.X, pos.Y) && Mouse.IsButtonPressed(Mouse.Button.Left) && time > 0.5)
+            {
+                _timer.Restart();
                 Active = !Active;
-
+            }
+            
             Fill();
         }
 
         public bool Update(string value)
         {
             var digit = value.All(c => char.IsDigit(c) || c == '\b' || c == '\r');
-
 
             if (Active && digit)
             {
@@ -56,7 +58,5 @@ namespace GameLife
         {
             return int.Parse(_value);
         }
-
-
     }
 }
